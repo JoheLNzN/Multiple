@@ -1,0 +1,332 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+*{
+	font-family: 'Roboto';
+	user-select: none;
+}
+
+.datepick {
+	position: relative;
+	width: 100% !important;
+	height: auto;
+	background-color: #fff;
+	font-size: 14px;
+	background-color: white;
+	padding: 10px;
+}
+
+.datepick a{
+	text-decoration: none;
+}
+
+.datepick-rtl {
+	direction: rtl;
+}
+
+.datepick-popup {
+	z-index: 1000;
+}
+
+.datepick-disable {
+	position: absolute;
+	z-index: 100;
+	background-color: purple;
+	opacity: 0.5;
+}
+
+.datepick button {
+    background-color: #fcc;
+    border: none;
+    border-radius: 50%;
+	font-weight: bold;
+}
+
+.datepick-nav{
+	height: 35px;
+	background-color: red;
+}
+
+.datepick-nav, .datepick-ctrl {
+	float: left;
+	width: 100%;
+	line-height: 30px;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+
+.datepick-ctrl {
+	background-color: #600;
+}
+
+a.datepick-cmd-today{
+	display: block;
+	position: absolute;
+	width: 60px;
+	height: 60px !important;
+	line-height: 60px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	top: -40px;
+	background-color: #417AFF;
+	border-radius: 50%;
+	color: #fff;
+	text-decoration: none;
+}
+
+.datepick-ctrl .datepick-cmd:hover {
+	background-color: greenyellow;
+}
+.datepick-cmd-prevJump, .datepick-cmd-nextJump {
+	width: 8%;
+}
+a.datepick-cmd {
+	height: 30px;
+}
+button.datepick-cmd {
+	text-align: center;
+}
+
+.datepick-cmd-prev{
+	position: absolute;
+	display: block;
+	background-color: white;
+    cursor: pointer;
+	width: 30px;
+	border-radius: 10px 0px 0px 10px;
+	height: 130px !important;
+	left: -31px;
+	bottom: 0;
+	top: 0;
+	margin: auto;
+    background-repeat: no-repeat;
+    background-size: 15px;
+	background-position: center;
+	background-size: 15px;
+	background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 512.006 512.006' style='enable-background:new 0 0 512.006 512.006;' xml:space='preserve'%3E%3Cg%3E%3Cg%3E%3Cpath fill='%23417AFF' d='M388.419,475.59L168.834,256.005L388.418,36.421c8.341-8.341,8.341-21.824,0-30.165s-21.824-8.341-30.165,0 L123.586,240.923c-8.341,8.341-8.341,21.824,0,30.165l234.667,234.667c4.16,4.16,9.621,6.251,15.083,6.251 c5.461,0,10.923-2.091,15.083-6.251C396.76,497.414,396.76,483.931,388.419,475.59z'/%3E%3C/g%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E");
+	transition: all .3s ease;
+}
+
+.datepick-cmd-prev:hover{
+	opacity: 1;
+	cursor: pointer;
+}
+
+.datepick-cmd-next{
+	position: absolute;
+	display: block;
+	background-color: white;
+    cursor: pointer;
+	width: 30px;
+	border-radius: 0px 10px 10px 0px;
+	height: 130px !important;
+	right: -31px;
+	bottom: 0;
+	top: 0;
+	margin: auto;
+    background-repeat: no-repeat;
+    background-size: 15px;
+	background-position: center;
+	background-size: 15px;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Capa_1' x='0px' y='0px' viewBox='0 0 240.823 240.823' style='enable-background:new 0 0 240.823 240.823;' xml:space='preserve'%3E%3Cg%3E%3Cpath xmlns='http://www.w3.org/2000/svg' fill='%23417AFF' d='M183.189,111.816L74.892,3.555c-4.752-4.74-12.451-4.74-17.215,0c-4.752,4.74-4.752,12.439,0,17.179 l99.707,99.671l-99.695,99.671c-4.752,4.74-4.752,12.439,0,17.191c4.752,4.74,12.463,4.74,17.215,0l108.297-108.261 C187.881,124.315,187.881,116.495,183.189,111.816z'/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E");
+}
+
+.datepick-cmd-next:hover{
+	cursor: pointer;
+	opacity: 1;
+}
+
+.datepick-cmd-prev, .datepick-cmd-prevJump, .datepick-cmd-clear {
+	float: left;
+	padding-left: 2%;
+}
+.datepick-cmd-current, .datepick-cmd-today {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	text-align: center;
+}
+.datepick-cmd-next, .datepick-cmd-nextJump, .datepick-cmd-close {
+	float: right;
+	text-align: right;
+}
+.datepick-rtl .datepick-cmd-prev, .datepick-rtl .datepick-cmd-prevJump,
+.datepick-rtl .datepick-cmd-clear {
+	float: right;
+	padding-left: 0%;
+	padding-right: 2%;
+	text-align: right;
+}
+.datepick-rtl .datepick-cmd-current, .datepick-rtl .datepick-cmd-today {
+	float: right;
+}
+.datepick-rtl .datepick-cmd-next, .datepick-rtl .datepick-cmd-nextJump,
+.datepick-rtl .datepick-cmd-close {
+	float: left;
+	padding-left: 2%;
+	padding-right: 0%;
+	text-align: left;
+}
+.datepick-month-nav {
+	float: left;
+	text-align: center;
+}
+.datepick-month-nav div {
+	float: left;
+	width: 12.5%;
+	margin: 1%;
+	padding: 1%;
+	background-color: red;
+}
+.datepick-month-nav span {
+	color: #888;
+}
+.datepick-month-row {
+	clear: left;
+}
+.datepick-month {
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+
+.datepick-month-header{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+    text-align: center;
+    background-color: #fff;
+    padding: 15px;
+}
+
+.datepick-month-header input, 
+.datepick-month-header select {
+	display: inline-block;
+    position: relative;
+    z-index: 9999;
+    overflow: hidden;
+    margin: 0;
+    padding: 5px 3px;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: normal;
+    color: #417AFF;
+}
+
+.datepick-month-header .datepick-month-year:last-child{
+	font-weight: bold;
+}
+
+.datepick-month-header select, .datepick-month-header input {
+	height: 1.4em;
+	margin: 0em;
+	padding: 0em;
+	border: none;
+	font-size: 15px;
+}
+.datepick-month-header input {
+	position: absolute;
+	display: none;
+}
+.datepick-month table {
+	width: 100%;
+	background-color:white;
+	border-collapse: collapse;
+}
+
+.datepick-month th{
+	width: calc(100%/7) !important;
+}
+
+.datepick-month th, 
+.datepick-month td {
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	background-color: white;
+}
+
+.datepick-month th, 
+.datepick-month th{
+	color: rgba(0, 0, 0, .7);
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    border-bottom: 2px solid #F2F6F8;
+}
+.datepick-month td {
+	background-color: white;
+	padding: 1px;
+}
+
+.datepick-month td.datepick-week * {
+	background-color: #777;
+	color: #fff;
+	border: none;
+}
+.datepick-month a {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #555;
+	line-height: 40px;
+	background-color: white;
+	border-radius: 50%;
+}
+
+.datepick-month span {
+	display: block;
+	width: 100%;
+}
+.datepick-month td span {
+	color: #888;
+}
+.datepick-month td .datepick-other-month {
+	background-color: white;
+}
+.datepick-month td .datepick-weekend {
+	background-color: white;
+}
+.datepick-month td .datepick-today {
+	color: white;
+    background-color: #00C7AF !important;
+	transition: all .3s ease;
+	color: white !important;
+}
+
+.datepick-month td .datepick-today:hover{
+	background-color: #00C7AF;
+	color: white;
+}
+
+.datepick-month td .datepick-highlight {
+	background-color: #ecf0f1;;
+	color: #417AFF;
+}
+.datepick-month td .datepick-selected {
+	color: #fff !important;
+    background-color: #417AFF;
+    border-radius: 50%;
+}
+.datepick-month th.datepick-week {
+	background-color: red;
+	color: #fff;
+}
+.datepick-status {
+	clear: both;
+	background-color: indigo;
+	text-align: center;
+}
+.datepick-clear-fix {
+	clear: both;
+}
+
+.datepick-month table tbody tr:first-child td{
+	padding-top: 8px;
+}

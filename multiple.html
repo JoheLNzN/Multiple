@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="css/jquery.datepick.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/all.css">
+</head>
+
+<body>
+
+    <div class="c-mobile">
+        <div class="datepicker"></div>
+    </div><!--c-mobile-->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/jquery.plugin.min.js"></script>
+    <script src="js/jquery.datepick.min.js"></script>
+
+    <script type="text/javascript">
+        $('.datepicker').datepick({ 
+            onSelect: showDate,
+            firstDay: 1,
+
+            /* Change Language */
+            monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
+            dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+            dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sáb"],
+            dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
+            prevText: "",
+            nextText: "",
+            todayText: "Hoy",
+            prevStatus: "",
+            nextStatus: "",
+            todayStatus: "",
+            monthStatus: "",
+            yearStatus: "",
+            currentStatus: "",
+            dayStatus: "",
+
+
+            /* Configuraciones */
+            multiSelect: 999,
+            dateFormat: "dd/MM/yyyy"
+        });
+
+        function showDate(date) {
+            // alert('The date chosen is ' + date);
+        }
+    </script>
+</body>
+
+</html>
