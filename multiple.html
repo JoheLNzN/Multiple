@@ -13,20 +13,21 @@
 <body>
 
     <div class="c-mobile">
-        <div class="datepicker"></div>
-    </div><!--c-mobile-->
+        <div id="datepicker"></div>
+    </div>
+    <!--c-mobile-->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/jquery.plugin.min.js"></script>
     <script src="js/jquery.datepick.min.js"></script>
 
     <script type="text/javascript">
-        $('.datepicker').datepick({ 
+        $('#datepicker').datepick({
             onSelect: showDate,
             firstDay: 1,
 
             /* Change Language */
-            monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"],
             monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
             dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
             dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sáb"],
@@ -45,12 +46,40 @@
 
             /* Configuraciones */
             multiSelect: 999,
-            dateFormat: "dd/MM/yyyy"
+            dateFormat: "dd/MM/yyyy",
+
+            onChangeMonthYear: function(year, month) {
+                // alert('Moving to month ' + month + '/' + year);
+            }
         });
 
         function showDate(date) {
             // alert('The date chosen is ' + date);
         }
+
+        $('#datepicker').on('click', function(e) {
+            e.preventDefault();
+
+            var $filas = $('#datepicker').find('tbody tr');
+
+            $filas.each(function(iRow, Row) {
+
+                var $row = $(Row);
+                var $tds = $row.find('td');
+
+                console.log('Fila : ' + iRow);
+
+                $tds.each(function(iCol, Col) {
+
+                    var $col = $(Col);
+
+                    if ($col.context.innerText.trim() != "")
+                        console.log('Col : ' + iCol);
+
+                });
+            });
+
+        });
     </script>
 </body>
 
