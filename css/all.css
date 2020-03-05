@@ -6,17 +6,16 @@
 }
 
 body{
-    background-color: black;
     display: flex;
     min-height: 100vh;
     justify-content: center;
     align-items: center;
     padding: 50px 0px;
+    background-color: rgb(220, 220, 220);
 }
 
 div.c-mobile{
     width: 320px;
-    background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
 }
 
 @media all and (max-width: 450px){

@@ -380,18 +380,20 @@ span.side-a-last{
 div.c-events{
 	font-family: 'Roboto';
 	width: 100%;
+	background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
 	transition: all .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 div.c-events-inner{
 	width: 90%;
-	margin: 5% auto;
+	padding: 5% 0px;
+	margin: 0 auto;
+	background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
 }
 
 div.event{
 	padding: 15px;
 	border-radius: 6px;
-	background-color: yellow;
 	margin-bottom: 10px;
 }
 
