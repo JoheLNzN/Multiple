@@ -1,0 +1,50 @@
+[
+    {
+        "Project": {
+            "StartDate": "04/04/2019",
+            "EndDate": "08/04/2019",
+            "Color": "red",
+            "Event": [
+                {
+                    "Title": "Title Project 1 | One",
+                    "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "red"
+                },
+                {
+                    "Title": "Title Project 1 | Two",
+                    "Details": "2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "blue"
+                },
+                {
+                    "Title": "Title Project 1 | Three",
+                    "Details": "3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "green"
+                },
+                {
+                    "Title": "Title Project 1 | Four",
+                    "Details": "4. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "purple"
+                }
+            ]
+        }
+    },
+    {
+        "Project": {
+            "StartDate": "22/04/2019",
+            "EndDate": "27/04/2019",
+            "Color": "blue",
+            "Event": [
+                {
+                    "Title": "Title Project 2 | One",
+                    "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "red"
+                },
+                {
+                    "Title": "Title Project 2 | Two",
+                    "Details": "2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "blue"
+                }
+            ]
+        }
+    }
+]

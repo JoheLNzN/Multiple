@@ -47,6 +47,12 @@ function getRangeDates(startDate, endDate) {
         range.push(new Date(startDate));
         startDate.setDate(startDate.getDate() + 1);
     }
+
+    /* Add more dates */
+    // range.push(new Date(2020, 3, 22),
+    //     new Date(2020, 3, 23),
+    //     new Date(2020, 3, 24),
+    //     new Date(2020, 3, 25));
     return range;
 }
 
@@ -273,11 +279,11 @@ $(_dtp).on('click', 'tbody td a.datepick-selected', function (e) {
                 var $events = _myObject.Project.Event;
                 $('div.c-events-inner').find('div.event').remove();
 
-                $.each($events, function(i, evento){
+                $.each($events, function (i, evento) {
                     var $eventHTML = "<div class='event' style='background-color: " + evento.Color + "'>" +
-                    "<span class='event-title'>" + evento.Title + "</span>" +
-                    " <p class='event-details'>" + evento.Details + "</p>" +
-                    "</div>";
+                        "<span class='event-title'>" + evento.Title + "</span>" +
+                        " <p class='event-details'>" + evento.Details + "</p>" +
+                        "</div>";
 
                     $('div.c-events-inner').append($eventHTML);
                 });
