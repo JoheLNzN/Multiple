@@ -43,8 +43,10 @@
 }
 
 .datepick-nav{
-	height: 35px;
-	background-color: red;
+	position: relative;
+	width: 100%;
+	height: 30px;
+	text-align: center;
 }
 
 .datepick-nav, .datepick-ctrl {
@@ -61,17 +63,13 @@
 }
 
 a.datepick-cmd-today{
-	display: block;
-	position: absolute;
+	display: inline-block;
+	position: relative;
 	width: 60px;
-	height: 60px !important;
-	line-height: 60px;
-	left: 0;
-	right: 0;
-	margin: 0 auto;
-	top: -40px;
+	line-height: 30px;
+	height: 100%;
 	background-color: #417AFF;
-	border-radius: 50%;
+	border-radius: 4px;
 	color: #fff;
 	text-decoration: none;
 }
@@ -82,9 +80,7 @@ a.datepick-cmd-today{
 .datepick-cmd-prevJump, .datepick-cmd-nextJump {
 	width: 8%;
 }
-a.datepick-cmd {
-	height: 30px;
-}
+
 button.datepick-cmd {
 	text-align: center;
 }
@@ -95,17 +91,16 @@ button.datepick-cmd {
 	background-color: white;
     cursor: pointer;
 	width: 30px;
-	border-radius: 10px 0px 0px 10px;
-	height: 130px !important;
-	left: -31px;
+	border-radius: 50%;
+	height: 100% !important;
+	left: 0;
 	bottom: 0;
-	top: 0;
-	margin: auto;
     background-repeat: no-repeat;
     background-size: 15px;
-	background-position: center;
-	background-size: 15px;
+	background-position: 9px;
+	background-size: 11px;
 	background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 512.006 512.006' style='enable-background:new 0 0 512.006 512.006;' xml:space='preserve'%3E%3Cg%3E%3Cg%3E%3Cpath fill='%23417AFF' d='M388.419,475.59L168.834,256.005L388.418,36.421c8.341-8.341,8.341-21.824,0-30.165s-21.824-8.341-30.165,0 L123.586,240.923c-8.341,8.341-8.341,21.824,0,30.165l234.667,234.667c4.16,4.16,9.621,6.251,15.083,6.251 c5.461,0,10.923-2.091,15.083-6.251C396.76,497.414,396.76,483.931,388.419,475.59z'/%3E%3C/g%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E");
+
 	transition: all .3s ease;
 }
 
@@ -120,16 +115,14 @@ button.datepick-cmd {
 	background-color: white;
     cursor: pointer;
 	width: 30px;
-	border-radius: 0px 10px 10px 0px;
-	height: 130px !important;
-	right: -31px;
+	border-radius: 50%;
+	height: 100% !important;
+	right: 0;
 	bottom: 0;
-	top: 0;
-	margin: auto;
     background-repeat: no-repeat;
     background-size: 15px;
-	background-position: center;
-	background-size: 15px;
+	background-position: 11px;
+	background-size: 11px;
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='Capa_1' x='0px' y='0px' viewBox='0 0 240.823 240.823' style='enable-background:new 0 0 240.823 240.823;' xml:space='preserve'%3E%3Cg%3E%3Cpath xmlns='http://www.w3.org/2000/svg' fill='%23417AFF' d='M183.189,111.816L74.892,3.555c-4.752-4.74-12.451-4.74-17.215,0c-4.752,4.74-4.752,12.439,0,17.179 l99.707,99.671l-99.695,99.671c-4.752,4.74-4.752,12.439,0,17.191c4.752,4.74,12.463,4.74,17.215,0l108.297-108.261 C187.881,124.315,187.881,116.495,183.189,111.816z'/%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E");
 }
 
@@ -210,10 +203,13 @@ button.datepick-cmd {
     overflow: hidden;
     margin: 0;
     padding: 5px 3px;
-    font-size: 15px;
-    line-height: 20px;
     font-weight: normal;
-    color: #417AFF;
+	color: #417AFF;
+	font-size: 17px !important;
+}
+
+.datepick-month-header select:first-child {
+	text-align: right;
 }
 
 .datepick-month-header .datepick-month-year:last-child{
@@ -221,7 +217,7 @@ button.datepick-cmd {
 }
 
 .datepick-month-header select, .datepick-month-header input {
-	height: 1.4em;
+	height: auto;
 	margin: 0em;
 	padding: 0em;
 	border: none;
@@ -243,6 +239,7 @@ button.datepick-cmd {
 
 .datepick-month th, 
 .datepick-month td {
+	position: relative;
 	width: 40px;
 	height: 40px;
 	text-align: center;
@@ -261,11 +258,11 @@ button.datepick-cmd {
 }
 .datepick-month td {
 	background-color: white;
-	padding: 1px;
+	padding: 1px 0px;
 }
 
 .datepick-month td.datepick-week * {
-	background-color: #777;
+	background-color: red;
 	color: #fff;
 	border: none;
 }
@@ -276,7 +273,6 @@ button.datepick-cmd {
 	height: 100%;
 	color: #555;
 	line-height: 40px;
-	background-color: white;
 	border-radius: 50%;
 }
 
@@ -293,10 +289,8 @@ button.datepick-cmd {
 .datepick-month td .datepick-weekend {
 	background-color: white;
 }
-.datepick-month td .datepick-today {
-	color: white;
-    background-color: #00C7AF !important;
-	transition: all .3s ease;
+.datepick-today {
+    /* background-color: #009432 !important; */
 	color: white !important;
 }
 
@@ -310,13 +304,13 @@ button.datepick-cmd {
 	color: #417AFF;
 }
 .datepick-month td .datepick-selected {
-	color: #fff !important;
-    background-color: #417AFF;
+	color: white !important;
+    /* background-color: #417AFF; */
     border-radius: 50%;
 }
 .datepick-month th.datepick-week {
 	background-color: red;
-	color: #fff;
+	color: white;
 }
 .datepick-status {
 	clear: both;
@@ -329,4 +323,56 @@ button.datepick-cmd {
 
 .datepick-month table tbody tr:first-child td{
 	padding-top: 8px;
+}
+
+.isSnake a{
+	border-radius: 0px !important;
+}
+
+.isSnake-first a{
+	border-radius: 50px 0px 0px 50px !important;
+}
+
+.isSnake-last a{
+	border-radius: 0px 50px 50px 0px !important;
+}
+
+
+/* Lista */
+
+.datepick table tbody td ul{
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	width: calc(100% - 2px);
+	height: 6px;
+	bottom: 3px;
+	left: 1px;
+}
+
+.datepick table tbody td ul li{
+	display: block;
+	width: 7px;
+	height: 7px;
+	margin: 0 1.5px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, .7);
+}
+
+/* .datepick table tbody td ul li.li-1{
+	background-color: #e84118;
+}
+
+.datepick table tbody td ul li.li-2{
+	background-color: #fff200;
+}
+
+.datepick table tbody td ul li.li-3{
+	background-color: #4cd137;
+} */
+
+.datepick select{
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: white;
 }

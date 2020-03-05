@@ -19,14 +19,64 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/jquery.plugin.min.js"></script>
-    <script src="js/jquery.datepick.min.js"></script>
+    <script src="js/jquery.datepick.js"></script>
 
     <script type="text/javascript">
-        $('#datepicker').datepick({
-            onSelect: showDate,
-            firstDay: 1,
 
-            /* Change Language */
+        function getJSONFromDBFake() {
+            return {
+                "Project": {
+                    "StartDate": "04/04/2020",
+                    "EndDate": "28/04/2020",
+                    "Color": "#6ab04c",
+                    "Event": [
+                        {
+                            "Title": "Title One",
+                            "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                            "Color": "red"
+                        },
+                        {
+                            "Title": "Title Two",
+                            "Details": "2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                            "Color": "#f9ca24"
+                        },
+                        {
+                            "Title": "Title Three",
+                            "Details": "3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                            "Color": "#be2edd"
+                        },
+                        {
+                            "Title": "Title Four",
+                            "Details": "4. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                            "Color": "purple"
+                        }
+                    ]
+                }
+            }
+        }
+
+        function getRangeDates(startDate, endDate) {
+            var range = [];
+            while (startDate <= endDate) {
+                range.push(new Date(startDate));
+                startDate.setDate(startDate.getDate() + 1);
+            }
+            return range;
+        };
+
+    </script>
+
+    <script type="text/javascript">
+
+        /* Configurables */
+        var _myObject = getJSONFromDBFake();
+
+        /* Estáticos */
+        var _dtp = '#datepicker';
+        var _daysSelected = [];
+
+        $(_dtp).datepick({
+            firstDay: 1,
             monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"],
             monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
             dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
@@ -42,45 +92,191 @@
             yearStatus: "",
             currentStatus: "",
             dayStatus: "",
-
-
-            /* Configuraciones */
             multiSelect: 999,
             dateFormat: "dd/MM/yyyy",
-
-            onChangeMonthYear: function(year, month) {
-                // alert('Moving to month ' + month + '/' + year);
+            onSelect: function (dates) {
+                configDatePicker(_myObject);
             }
         });
 
-        function showDate(date) {
-            // alert('The date chosen is ' + date);
+
+        /**********************************************************
+         ****************    BEGIN  - Configuration   *************/
+
+        var sd = _myObject.Project.StartDate.split("/");
+        var ed = _myObject.Project.EndDate.split("/");
+
+        var startDate = new Date(sd[2], sd[1] - 1, sd[0]);
+        var endDate = new Date(ed[2], ed[1] - 1, ed[0]);
+
+        $(_dtp).datepick('setDate', getRangeDates(startDate, endDate));
+
+        /* Method */
+        function configDatePicker(config) {
+            debugger;
+
+            if (config == null || config == undefined) {
+                console.log('El objeto es nulo o no ha sido definido');
+                return;
+            }
+
+            var _theme, _color, _title, _details;
+
+            if (config.Project != undefined) {
+                _theme = config.Project.Color == undefined ? "#417AFF" : config.Project.Color;
+
+                if(config.Project.Event != undefined){
+
+                    switch (config.Project.Event.length) {
+                        case 0: {
+                            console.log('No hay eventos :(')
+                            break;
+                        }
+                        case 1: {
+                            _color = config.Project.Event[0].Color;
+                            break;
+                        }
+                        case 2: {
+                            _color = config.Project.Event[0].Color;
+                            _title = config.Project.Event[1].Color;
+                            break;
+                        }
+                        default: {
+                            _color = config.Project.Event[0].Color;
+                            _title = config.Project.Event[1].Color;
+                            _details = config.Project.Event[2].Color;
+                            break;
+                        }
+                    }
+                }
+            }
+            else {
+                _theme = '#417AFF';
+                _color = 'red';
+                _title = 'white';
+                _details = 'red';
+            }
+
+            var $dtp = $(document).find(_dtp);
+
+            $dtp.find('.datepick-today').css('background-color', '#A3CB38');
+
+            $dtp.find('a.datepick-cmd-today').css('background-color', _theme);
+            $dtp.find('.datepick-month-header input').css('color', _theme);
+            $dtp.find('.datepick-month-header select').css('color', _theme);
+            $dtp.find('a.datepick-selected').css('background-color', _theme);
+
+            customSnakeDays(_myObject);
+
+            $dtp.find('.datepick .li-1').css('background-color', _color);
+            $dtp.find('.datepick .li-2').css('background-color', _title);
+            $dtp.find('.datepick .li-3').css('background-color', _details);   
         }
 
-        $('#datepicker').on('click', function(e) {
+        /* Event */
+        $(_dtp).on('click', function (e) {
             e.preventDefault();
+            configDatePicker(_myObject);
+        });
 
-            var $filas = $('#datepicker').find('tbody tr');
+        $(_dtp).on('click', 'tbody td a', function (e) {
+            e.preventDefault();
+            alert('click');
+        });
 
-            $filas.each(function(iRow, Row) {
+        function customSnakeDays(config) {
+            var $dtp = $(document).find('#datepicker');
+            var $tbody = $dtp.find('tbody');
+            var $rows = $dtp.find('tbody tr');
 
-                var $row = $(Row);
+            $rows.each(function (indexRow, itemRow) {
+                var $row = $(itemRow);
                 var $tds = $row.find('td');
 
-                console.log('Fila : ' + iRow);
+                $tds.each(function (indexTd, itemTd) {
 
-                $tds.each(function(iCol, Col) {
+                    /* 0 to 6 */
+                    var $currentIndex = indexTd;
+                    var $prevIndex = indexTd - 1;
+                    var $nextIndex = indexTd + 1;
 
-                    var $col = $(Col);
+                    /* Add customs */
 
-                    if ($col.context.innerText.trim() != "")
-                        console.log('Col : ' + iCol);
+                    var $ulHTML = '<ul>';
+
+                    if (config.Project.Event != undefined) {
+
+                        switch (config.Project.Event.length) {
+                            case 0: {
+                                $ulHTML = "";
+                                break;
+                            }
+                            case 1: {
+                                $ulHTML += "<li class='li-1'></li>";
+                                break;
+                            }
+                            case 2: {
+                                $ulHTML += "<li class='li-1'></li><li class='li-2'></li>";
+                                break;
+                            }
+                            default: {
+                                $ulHTML += "<li class='li-1'></li><li class='li-2'></li><li class='li-3'></li>";
+                                break;
+                            }
+                        }
+
+                        if ($ulHTML == "") {
+                            console.log('No hay eventos');
+                        } else {
+                            $ulHTML += "</ul>";
+
+                            if (dayIsSelected($row, $currentIndex)) {
+                                $row.find('td').eq($currentIndex).find('ul').remove();
+                                $row.find('td').eq($currentIndex).append($ulHTML);
+                            }
+                        }
+                    }
+
+                    if (!dayIsSelected($row, $prevIndex) &&
+                        !dayIsSelected($row, $nextIndex)) {
+                        return;
+                    }
+
+                    //Prev td
+                    if ($prevIndex >= 0) {
+
+                        //Has prev and next item
+                        if (dayIsSelected($row, $prevIndex) &&
+                            dayIsSelected($row, $nextIndex)) {
+                            $row.find('td').eq($currentIndex).removeClass().addClass('isSnake');
+                        }
+
+                        if (!dayIsSelected($row, $nextIndex)) {
+                            $row.find('td').eq($currentIndex).removeClass().addClass('isSnake-last');
+                        }
+
+                        if (!dayIsSelected($row, $prevIndex)) {
+                            $row.find('td').eq($currentIndex).removeClass().addClass('isSnake-first');
+                        }
+                    }
+                    else {
+                        /* current = 0, prev = -1 */
+                        if (dayIsSelected($row, $nextIndex))
+                            $row.find('td').eq($currentIndex).removeClass().addClass('isSnake-first');
+                    }
 
                 });
             });
+        }
 
-        });
+        function dayIsSelected($row, $colIndex) {
+            return $row.find('td').eq($colIndex).find('a').hasClass('datepick-selected');
+        }
+
+        configDatePicker(_myObject);
+
     </script>
+
 </body>
 
 </html>
