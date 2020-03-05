@@ -11,9 +11,15 @@
 </head>
 
 <body>
-
     <div class="c-mobile">
         <div id="datepicker"></div>
+        <div class="c-events">
+            <div class="c-events-inner">
+
+            </div>
+            <!--c-events-inner-->
+        </div>
+        <!--c-events-->
     </div>
     <!--c-mobile-->
 
@@ -27,28 +33,28 @@
             return {
                 "Project": {
                     "StartDate": "04/04/2020",
-                    "EndDate": "28/04/2020",
-                    "Color": "#6ab04c",
+                    "EndDate": "21/04/2020",
+                    "Color": "#6500ED",
                     "Event": [
                         {
                             "Title": "Title One",
                             "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                            "Color": "red"
+                            "Color": "#DF007B"
                         },
                         {
                             "Title": "Title Two",
                             "Details": "2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                            "Color": "#f9ca24"
+                            "Color": "#05ABAD"
                         },
                         {
                             "Title": "Title Three",
                             "Details": "3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                            "Color": "#be2edd"
+                            "Color": "#FD9806"
                         },
                         {
                             "Title": "Title Four",
                             "Details": "4. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                            "Color": "purple"
+                            "Color": "green"
                         }
                     ]
                 }
@@ -63,6 +69,19 @@
             }
             return range;
         };
+
+        function hexToRgbA(hex, opacity) {
+            var c;
+            if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+                c = hex.substring(1).split('');
+                if (c.length == 3) {
+                    c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+                }
+                c = '0x' + c.join('');
+                return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ', ' + opacity + ')';
+            }
+            throw new Error('Bad Hex');
+        }
 
     </script>
 
@@ -81,7 +100,7 @@
             monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
             dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
             dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sáb"],
-            dayNamesMin: ["D", "L", "M", "X", "J", "V", "S"],
+            dayNamesMin: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sáb"],
             prevText: "",
             nextText: "",
             todayText: "Hoy",
@@ -93,12 +112,12 @@
             currentStatus: "",
             dayStatus: "",
             multiSelect: 999,
+
             dateFormat: "dd/MM/yyyy",
             onSelect: function (dates) {
                 configDatePicker(_myObject);
             }
         });
-
 
         /**********************************************************
          ****************    BEGIN  - Configuration   *************/
@@ -113,8 +132,6 @@
 
         /* Method */
         function configDatePicker(config) {
-            debugger;
-
             if (config == null || config == undefined) {
                 console.log('El objeto es nulo o no ha sido definido');
                 return;
@@ -125,7 +142,7 @@
             if (config.Project != undefined) {
                 _theme = config.Project.Color == undefined ? "#417AFF" : config.Project.Color;
 
-                if(config.Project.Event != undefined){
+                if (config.Project.Event != undefined) {
 
                     switch (config.Project.Event.length) {
                         case 0: {
@@ -170,18 +187,19 @@
 
             $dtp.find('.datepick .li-1').css('background-color', _color);
             $dtp.find('.datepick .li-2').css('background-color', _title);
-            $dtp.find('.datepick .li-3').css('background-color', _details);   
+            $dtp.find('.datepick .li-3').css('background-color', _details);
+            $dtp.find('.isSnake span.side-a').css('background-color', hexToRgbA(_theme, '.15'));
+            $dtp.find('.isSnake-first span.side-a-first').css('background-color', hexToRgbA(_theme, '.15'));
+            $dtp.find('.isSnake-last span.side-a-last').css('background-color', hexToRgbA(_theme, '.15'));
+
+            $dtp.find('.datepick .datepick-cmd-next').css('background-color', hexToRgbA(_theme, '.15'));
+            $dtp.find('.datepick .datepick-cmd-prev').css('background-color', hexToRgbA(_theme, '.15'));
         }
 
         /* Event */
-        $(_dtp).on('click', function (e) {
-            e.preventDefault();
+        $(_dtp).on('click', function () {
             configDatePicker(_myObject);
-        });
-
-        $(_dtp).on('click', 'tbody td a', function (e) {
-            e.preventDefault();
-            alert('click');
+            changeSizeDay();
         });
 
         function customSnakeDays(config) {
@@ -249,20 +267,49 @@
                         if (dayIsSelected($row, $prevIndex) &&
                             dayIsSelected($row, $nextIndex)) {
                             $row.find('td').eq($currentIndex).removeClass().addClass('isSnake');
+
+                            /* Add sides */
+                            var side = "<span class='side-a'></span>";
+                            $row.find('td').eq($currentIndex).find('span.side-a').remove();
+                            $row.find('td').eq($currentIndex).append(side);
                         }
+
 
                         if (!dayIsSelected($row, $nextIndex)) {
                             $row.find('td').eq($currentIndex).removeClass().addClass('isSnake-last');
+
+                            if ($row.find('td').eq($currentIndex).has('a.datepick-selected').length > 0) {
+
+                                /* Add sides */
+                                var side = "<span class='side-a-last'></span>";
+                                $row.find('td').eq($currentIndex).find('span.side-a-last').remove();
+                                $row.find('td').eq($currentIndex).append(side);
+                            }
                         }
 
                         if (!dayIsSelected($row, $prevIndex)) {
                             $row.find('td').eq($currentIndex).removeClass().addClass('isSnake-first');
+
+                            if ($row.find('td').eq($currentIndex).has('a.datepick-selected').length > 0) {
+                                /* Add sides */
+                                var side = "<span class='side-a-first'></span>";
+                                $row.find('td').eq($currentIndex).find('span.side-a-first').remove();
+                                $row.find('td').eq($currentIndex).append(side);
+                            }
                         }
                     }
                     else {
                         /* current = 0, prev = -1 */
-                        if (dayIsSelected($row, $nextIndex))
+                        if (dayIsSelected($row, $nextIndex)) {
                             $row.find('td').eq($currentIndex).removeClass().addClass('isSnake-first');
+
+                            if ($row.find('td').eq($currentIndex).has('a.datepick-selected').length > 0) {
+                                /* Add sides */
+                                var side = "<span class='side-a-first'></span>";
+                                $row.find('td').eq($currentIndex).find('span.side-a-first').remove();
+                                $row.find('td').eq($currentIndex).append(side);
+                            }
+                        }
                     }
 
                 });
@@ -274,6 +321,37 @@
         }
 
         configDatePicker(_myObject);
+
+        function changeSizeDay() {
+            var w = $(_dtp).find('table thead tr:first th:first').width();
+            $(_dtp).find('table tbody tr td').css('height', w + 'px');
+        }
+
+        $(window).on('resize', function () { changeSizeDay(); });
+        changeSizeDay();
+
+        $(_dtp).on('click', 'tbody td a.datepick-selected', function (e) {
+            e.preventDefault();
+
+            if (_myObject != undefined) {
+                if (_myObject.Project != undefined) {
+                    if (_myObject.Project.Event != undefined && _myObject.Project.Event != null) {
+
+                        var $events = _myObject.Project.Event;
+                        $('div.c-events-inner').find('div.event').remove();
+
+                        $.each($events, function(i, evento){
+                            var $eventHTML = "<div class='event' style='background-color: " + evento.Color + "'>" +
+                            "<span class='event-title'>" + evento.Title + "</span>" +
+                            " <p class='event-details'>" + evento.Details + "</p>" +
+                            "</div>";
+
+                            $('div.c-events-inner').append($eventHTML);
+                        });
+                    }
+                }
+            }
+        });
 
     </script>
 

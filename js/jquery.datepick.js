@@ -2105,7 +2105,7 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 					},
 					removeHighlight).
 				click(function() {
-					self.selectDate(elem, this);
+					// self.selectDate(elem, this); // Joel
 				}).end().
 				find('select.' + this._monthYearClass + ':not(.' + this._anyYearClass + ')').
 				change(function() {

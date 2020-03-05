@@ -6,20 +6,21 @@
 }
 
 body{
-    background-color: #EAEAF2;
+    background-color: black;
     display: flex;
     min-height: 100vh;
     justify-content: center;
     align-items: center;
+    padding: 50px 0px;
 }
 
 div.c-mobile{
-    width: 300px;
-    background-color: red;
+    width: 320px;
+    background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
 }
 
-/* @media all and (max-width: 600px){
+@media all and (max-width: 450px){
     div.c-mobile{
         width: 100%;
     }  
-} */
+}
