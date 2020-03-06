@@ -2195,6 +2195,9 @@ $(selector).datepick('setDate', [date1, date2, date3]) */
 			var drawDate = plugin.newDate(year, month, 1);
 			plugin.add(drawDate, -leadDays - (fixedWeeks && (drawDate.getDay() === firstDay) ? 7 : 0), 'd');
 			var ts = drawDate.getTime();
+
+			/* Joel */
+
 			// Generate weeks
 			var weeks = '';
 			for (var week = 0; week < numWeeks; week++) {

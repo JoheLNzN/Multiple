@@ -92,7 +92,7 @@ button.datepick-cmd {
 	height: 100%;
 	border-radius: 2px;
 	color: #fff;
-
+	background-color: rgb(240, 240, 240) !important;
     background-repeat: no-repeat;
 	background-size: 13px;
 	background-position: 21px;
@@ -112,7 +112,7 @@ button.datepick-cmd {
 	height: 100%;
 	border-radius: 2px;
 	color: #fff;
-
+	background-color: rgb(240, 240, 240) !important;
     background-repeat: no-repeat;
     background-size: 13px;
 	background-position: 21px;
@@ -221,6 +221,7 @@ button.datepick-cmd {
 	position: relative;
 	text-align: center;
 	background-color: white;
+	border: none;
 }
 .datepick-month th{
 	color: rgb(24, 24, 24);
@@ -259,7 +260,7 @@ button.datepick-cmd {
 	background-color: white;
 }
 .datepick-today {
-    /* background-color: #009432 !important; */
+    background-color: rgb(163, 203, 56) !important;
 	color: white !important;
 }
 .datepick-month td .datepick-today:hover{
@@ -272,7 +273,7 @@ button.datepick-cmd {
 }
 .datepick-month td .datepick-selected {
 	color: white !important;
-    border-radius: 50%;
+	border-radius: 50%;
 }
 .datepick-month th.datepick-week {
 	color: white;

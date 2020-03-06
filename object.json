@@ -1,48 +1,91 @@
 [
     {
         "Project": {
-            "StartDate": "04/04/2019",
-            "EndDate": "08/04/2019",
-            "Color": "red",
+            "StartDate": "04/04/2020",
+            "EndDate": "08/04/2020",
+            "Color": "#eb3b5a",
             "Event": [
                 {
                     "Title": "Title Project 1 | One",
                     "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    "Color": "red"
+                    "Color": "#D980FA"
                 },
                 {
                     "Title": "Title Project 1 | Two",
                     "Details": "2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    "Color": "blue"
+                    "Color": "#FFC312"
                 },
                 {
                     "Title": "Title Project 1 | Three",
                     "Details": "3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    "Color": "green"
+                    "Color": "#3d3d3d"
                 },
                 {
                     "Title": "Title Project 1 | Four",
                     "Details": "4. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    "Color": "purple"
+                    "Color": "#1e90ff"
+                },
+                {
+                    "Title": "Title Project 1 | Five",
+                    "Details": "5. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "#dfe4ea"
                 }
             ]
         }
     },
     {
         "Project": {
-            "StartDate": "22/04/2019",
-            "EndDate": "27/04/2019",
-            "Color": "blue",
+            "StartDate": "22/04/2020",
+            "EndDate": "27/04/2020",
+            "Color": "#22a6b3",
             "Event": [
                 {
                     "Title": "Title Project 2 | One",
                     "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    "Color": "red"
+                    "Color": "#130f40"
                 },
                 {
                     "Title": "Title Project 2 | Two",
                     "Details": "2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    "Color": "blue"
+                    "Color": "#1B9CFC"
+                }
+            ]
+        }
+    },
+    {
+        "Project": {
+            "StartDate": "15/04/2020",
+            "EndDate": "17/04/2020",
+            "Color": "#be2edd",
+            "Event": [
+                {
+                    "Title": "Title Project 3 | One",
+                    "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "#badc58"
+                }
+            ]
+        }
+    },
+    {
+        "Project": {
+            "StartDate": "29/04/2020",
+            "EndDate": "30/04/2020",
+            "Color": "#FFC312",
+            "Event": [
+                {
+                    "Title": "Title Project 4 | One",
+                    "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "#badc58"
+                },
+                {
+                    "Title": "Title Project 4 | Two",
+                    "Details": "2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "#badc58"
+                },
+                {
+                    "Title": "Title Project 4 | Three",
+                    "Details": "3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "#badc58"
                 }
             ]
         }
