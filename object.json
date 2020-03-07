@@ -1,44 +1,42 @@
-[
-    {
+[{
         "Project": {
             "StartDate": "04/04/2020",
             "EndDate": "08/04/2020",
             "Color": "#eb3b5a",
-            "Event": [
-                {
+            "Event": [{
                     "Title": "Title Project 1 | One",
                     "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                     "Color": "#D980FA",
-                    "StartDate" : "04/04/2020",
-                    "EndDate" : "07/04/2020"
+                    "StartDate": "04/04/2020",
+                    "EndDate": "07/04/2020"
                 },
                 {
                     "Title": "Title Project 1 | Two",
                     "Details": "2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                     "Color": "#FFC312",
-                    "StartDate" : "04/04/2020",
-                    "EndDate" : "09/04/2020"
+                    "StartDate": "04/04/2020",
+                    "EndDate": "09/04/2020"
                 },
                 {
                     "Title": "Title Project 1 | Three",
                     "Details": "3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                     "Color": "#3d3d3d",
-                    "StartDate" : "06/04/2020",
-                    "EndDate" : "08/04/2020"
+                    "StartDate": "06/04/2020",
+                    "EndDate": "08/04/2020"
                 },
                 {
                     "Title": "Title Project 1 | Four",
                     "Details": "4. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                     "Color": "#1e90ff",
-                    "StartDate" : "04/04/2020",
-                    "EndDate" : "06/04/2020"
+                    "StartDate": "04/04/2020",
+                    "EndDate": "06/04/2020"
                 },
                 {
                     "Title": "Title Project 1 | Five",
                     "Details": "5. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                     "Color": "#dfe4ea",
-                    "StartDate" : "08/04/2020",
-                    "EndDate" : "08/04/2020"
+                    "StartDate": "08/04/2020",
+                    "EndDate": "08/04/2020"
                 }
             ]
         }
@@ -48,36 +46,41 @@
             "StartDate": "22/04/2020",
             "EndDate": "27/04/2020",
             "Color": "#22a6b3",
-            "Event": [
-                {
+            "Event": [{
                     "Title": "Title Project 2 | One",
                     "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    "Color": "#130f40",
-                    "StartDate" : null,
-                    "EndDate" : null
+                    "Color": "#fbc531",
+                    "StartDate": "25/04/2020",
+                    "EndDate": "27/04/2020"
                 },
                 {
                     "Title": "Title Project 2 | Two",
                     "Details": "2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                     "Color": "#1B9CFC",
-                    "StartDate" : null,
-                    "EndDate" : null
+                    "StartDate": "22/04/2020",
+                    "EndDate": "22/04/2020"
                 }
             ]
         }
     },
     {
         "Project": {
-            "StartDate": "15/04/2020",
-            "EndDate": "17/04/2020",
+            "StartDate": "13/04/2020",
+            "EndDate": "19/04/2020",
             "Color": "#be2edd",
-            "Event": [
-                {
+            "Event": [{
                     "Title": "Title Project 3 | One",
                     "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                     "Color": "#badc58",
-                    "StartDate" : "15/04/2020",
-                    "EndDate" : "16/04/2020"
+                    "StartDate": "15/04/2020",
+                    "EndDate": "18/04/2020"
+                },
+                {
+                    "Title": "Title Project 3 | Two",
+                    "Details": "2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    "Color": "#4834d4",
+                    "StartDate": "13/04/2020",
+                    "EndDate": "17/04/2020"
                 }
             ]
         }
@@ -87,27 +90,26 @@
             "StartDate": "29/04/2020",
             "EndDate": "30/04/2020",
             "Color": "#FFC312",
-            "Event": [
-                {
+            "Event": [{
                     "Title": "Title Project 4 | One",
                     "Details": "1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    "Color": "#badc58",
-                    "StartDate" : null,
-                    "EndDate" : null
+                    "Color": "#130f40",
+                    "StartDate": "29/04/2020",
+                    "EndDate": "29/04/2020"
                 },
                 {
                     "Title": "Title Project 4 | Two",
                     "Details": "2. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    "Color": "#badc58",
-                    "StartDate" : null,
-                    "EndDate" : null
+                    "Color": "#6ab04c",
+                    "StartDate": "29/04/2020",
+                    "EndDate": "30/04/2020"
                 },
                 {
                     "Title": "Title Project 4 | Three",
                     "Details": "3. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                    "Color": "#badc58",
-                    "StartDate" : null,
-                    "EndDate" : null
+                    "Color": "#e84118",
+                    "StartDate": "29/04/2020",
+                    "EndDate": "05/05/2020"
                 }
             ]
         }

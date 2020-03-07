@@ -31,7 +31,7 @@ $(_dtp).datepick({
     //     ConfigDatePicker(_myProjects);
     // },
     dateFormat: "dd/MM/yyyy",
-    onSelect: function (dates) {
+    onSelect: function(dates) {
         ConfigDatePicker(_myProjects);
     }
 });
@@ -61,7 +61,7 @@ function GetAllDatesByProjects(Projects) {
 
     var allDates = [];
 
-    $.each(Projects, function (iproj, proj) {
+    $.each(Projects, function(iproj, proj) {
 
         var range = GetRangeDates(proj.Project.StartDate, proj.Project.EndDate)
 
@@ -72,7 +72,8 @@ function GetAllDatesByProjects(Projects) {
     $(_dtp).datepick('setDate', allDates);
 }
 
-/* Calling */ GetAllDatesByProjects(_myProjects);
+/* Calling */
+GetAllDatesByProjects(_myProjects);
 
 function HexToRgbA(hex, opacity) {
     var c;
@@ -100,7 +101,7 @@ function ConfigDatePicker(Projects) {
 
     var $dtp = $(document).find(_dtp);
 
-    $.each(Projects, function (iproj, proj) {
+    $.each(Projects, function(iproj, proj) {
 
         _theme = proj.Project.Color;
 
@@ -161,7 +162,7 @@ function ConfigDatePicker(Projects) {
 
 }
 
-$(document).on('click', _dtp, function (e) {
+$(document).on('click', _dtp, function(e) {
     e.preventDefault();
     ChangeSizeDay();
     ConfigDatePicker(_myProjects);
@@ -177,11 +178,11 @@ function CustomSnakeDays(Projects) {
     var $dtp = $(document).find(_dtp);
     var $rows = $dtp.find('tbody tr');
 
-    $rows.each(function (indexRow, itemRow) {
+    $rows.each(function(indexRow, itemRow) {
         var $row = $(itemRow);
         var $tds = $row.find('td');
 
-        $tds.each(function (indexTd, itemTd) {
+        $tds.each(function(indexTd, itemTd) {
 
             /* 0 to 6 */
             var $currentIndex = indexTd;
@@ -201,11 +202,11 @@ function CustomSnakeDays(Projects) {
             var colorEvent;
 
             //Projects foreach
-            $.each(Projects, function (iproj, proj) {
+            $.each(Projects, function(iproj, proj) {
                 colorEvent = proj.Project.Color;
 
                 //Events foreach
-                $.each(proj.Project.Event, function (ievent, event) {
+                $.each(proj.Project.Event, function(ievent, event) {
                     var currentTD = $row.find('td').eq(indexTd);
 
                     var dateStartEvent = event.StartDate;
@@ -226,8 +227,24 @@ function CustomSnakeDays(Projects) {
                             var hasA = $row.find('td').eq($currentIndex).find('a').length;
 
                             if (hasA != 0) {
-                                var $liHTML = "<li class='dp" + ts + "' style='background-color: " + event.Color + "'></li>";
-                                $row.find('td').eq($currentIndex).find('ul.dp' + ts).append($liHTML);
+
+                                //Validate only 3 points
+                                var ulLength = $row.find('td').eq($currentIndex).find('ul.dp' + ts + ' li').length;
+
+                                if (ulLength < 4) {
+                                    var $liHTML = "<li class='dp" + ts + "' style='background-color: " + event.Color + "'></li>";
+                                    $row.find('td').eq($currentIndex).find('ul.dp' + ts).append($liHTML);
+                                }
+
+                                console.log("Fila : " + (indexRow + 1) + ", Col : " + (indexTd + 1));
+
+                                console.log(ulLength);
+
+                                if (ulLength > 2) {
+
+                                    var hasMoreEventHTML = "<span class='hasMoreEvents'></span>";
+                                    $row.find('td').eq($currentIndex).find('a').append(hasMoreEventHTML);
+                                }
                             }
                         }
                     }
@@ -281,8 +298,7 @@ function CustomSnakeDays(Projects) {
                         $row.find('td').eq($currentIndex).append(side);
                     }
                 }
-            }
-            else {
+            } else {
                 /* current = 0, prev = -1 */
                 if (DayIsSelected($row, $nextIndex)) {
                     $row.find('td').eq($currentIndex).removeClass().addClass('isSnake-first');
@@ -310,10 +326,10 @@ function ChangeSizeDay() {
     $(_dtp).find('table tbody tr td').css('height', w + 'px');
 }
 
-$(window).on('resize', function () { ChangeSizeDay(); });
+$(window).on('resize', function() { ChangeSizeDay(); });
 ChangeSizeDay();
 
-$(_dtp).on('click', 'tbody td a.datepick-selected', function (e) {
+$(_dtp).on('click', 'tbody td a.datepick-selected', function(e) {
     e.preventDefault();
 
     var tsClass = $(this).prop('class').split(' ')[0];
