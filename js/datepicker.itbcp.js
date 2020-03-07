@@ -27,14 +27,12 @@ $(_dtp).datepick({
     currentStatus: "",
     dayStatus: "",
     multiSelect: 999,
-
+    // onChangeMonthYear: function(year, month) {
+    //     ConfigDatePicker(_myProjects);
+    // },
     dateFormat: "dd/MM/yyyy",
     onSelect: function (dates) {
         ConfigDatePicker(_myProjects);
-    },
-    onChangeMonthYear: function(year, month) {
-        ConfigDatePicker(_myProjects);
-        ChangeSizeDay();
     }
 });
 
@@ -107,18 +105,18 @@ function ConfigDatePicker(Projects) {
         _theme = proj.Project.Color;
 
         var range = GetRangeDates(proj.Project.StartDate, proj.Project.EndDate);
-        
+
         for (var i = 0; i < range.length; i++) {
             var date = range[i];
             date.setHours(12, 0, 0);
             var ts = date.getTime();
 
             $dtp.find('tbody tr td a.dp' + ts).css('background-color', _theme);
-           
+
             $dtp.find('tbody span.side-a-last.dp' + ts).css('background-color', HexToRgbA(_theme, '.15'));
             $dtp.find('tbody span.side-a-first.dp' + ts).css('background-color', HexToRgbA(_theme, '.15'));
             $dtp.find('tbody span.side-a.dp' + ts).css('background-color', HexToRgbA(_theme, '.15'));
-        }        
+        }
 
         // $dtp.find('.datepick .li-1').css('background-color', _color);
         // $dtp.find('.datepick .li-2').css('background-color', _title);
@@ -190,41 +188,51 @@ function CustomSnakeDays(Projects) {
             var $prevIndex = indexTd - 1;
             var $nextIndex = indexTd + 1;
 
-            /* Add customs */
-            var $ulHTML = '<ul>';
+            /* Add ul's a todos los días (excepto si es de otro mes) */
+            var hasA = $row.find('td').eq($currentIndex).find('a').length;
 
-            // if (config.Project.Event != undefined) {
+            if (hasA != 0) {
+                var ts = GetTimeFromElementA($row.find('td').eq($currentIndex).find('a'));
+                var $ulHTML = '<ul class="dp' + ts + '"></ul>';
+                $row.find('td').eq($currentIndex).find('ul').remove();
+                $row.find('td').eq($currentIndex).append($ulHTML);
+            }
 
-            //     switch (config.Project.Event.length) {
-            //         case 0: {
-            //             $ulHTML = "";
-            //             break;
-            //         }
-            //         case 1: {
-            //             $ulHTML += "<li class='li-1'></li>";
-            //             break;
-            //         }
-            //         case 2: {
-            //             $ulHTML += "<li class='li-1'></li><li class='li-2'></li>";
-            //             break;
-            //         }
-            //         default: {
-            //             $ulHTML += "<li class='li-1'></li><li class='li-2'></li><li class='li-3'></li>";
-            //             break;
-            //         }
-            //     }
+            var colorEvent;
 
-            //     if ($ulHTML == "") {
-            //         console.log('No hay eventos');
-            //     } else {
-            //         $ulHTML += "</ul>";
+            //Projects foreach
+            $.each(Projects, function (iproj, proj) {
+                colorEvent = proj.Project.Color;
 
-            //         if (dayIsSelected($row, $currentIndex)) {
-            //             $row.find('td').eq($currentIndex).find('ul').remove();
-            //             $row.find('td').eq($currentIndex).append($ulHTML);
-            //         }
-            //     }
-            // }
+                //Events foreach
+                $.each(proj.Project.Event, function (ievent, event) {
+                    var currentTD = $row.find('td').eq(indexTd);
+
+                    var dateStartEvent = event.StartDate;
+                    var dateEndEvent = event.EndDate;
+
+                    //Si el evento tiene fecha ini && fecha fin
+                    if (dateStartEvent != null &&
+                        dateEndEvent != null) {
+
+                        var range = GetRangeDates(dateStartEvent, dateEndEvent);
+
+                        for (var i = 0; i < range.length; i++) {
+
+                            var onlyDate = range[i];
+                            onlyDate.setHours(12, 0, 0);
+                            var ts = onlyDate.getTime();
+
+                            var hasA = $row.find('td').eq($currentIndex).find('a').length;
+
+                            if (hasA != 0) {
+                                var $liHTML = "<li class='dp" + ts + "' style='background-color: " + event.Color + "'></li>";
+                                $row.find('td').eq($currentIndex).find('ul.dp' + ts).append($liHTML);
+                            }
+                        }
+                    }
+                });
+            });
 
             if (!DayIsSelected($row, $prevIndex) &&
                 !DayIsSelected($row, $nextIndex)) {
@@ -362,4 +370,4 @@ function TransformDateToDDMMYYY(date) {
     }
 }
 
-ConfigDatePicker(_myProjects);
+// ConfigDatePicker(_myProjects);
