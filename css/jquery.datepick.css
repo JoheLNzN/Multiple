@@ -68,7 +68,7 @@ a.datepick-cmd-today {
     right: -5px;
     line-height: 30px;
     height: 100%;
-    background-color: rgb(163, 203, 56) !important;
+    background-color: #4169e1;
     border-radius: 2px;
     color: #fff;
     text-decoration: none;
@@ -302,7 +302,7 @@ button.datepick-cmd {
 }
 
 .datepick-today {
-    background-color: rgb(163, 203, 56) !important;
+    background-color: #4169e1 !important;
     color: white !important;
 }
 
@@ -375,19 +375,6 @@ button.datepick-cmd {
     border-radius: 50%;
 }
 
-
-/* .datepick table tbody td ul li.li-1{
-	background-color: #e84118;
-}
-
-.datepick table tbody td ul li.li-2{
-	background-color: #fff200;
-}
-
-.datepick table tbody td ul li.li-3{
-	background-color: #4cd137;
-} */
-
 .datepick select {
     -webkit-appearance: none;
     appearance: none;
@@ -433,15 +420,14 @@ span.side-a-last {
 div.c-events {
     font-family: 'Roboto';
     width: 100%;
-    background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+    background-color: #e3eeff;
     transition: all .4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 div.c-events-inner {
-    width: 90%;
-    padding: 5% 0px;
+    width: 100%;
+    padding: 10px;
     margin: 0 auto;
-    background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
 }
 
 div.event {
@@ -489,5 +475,24 @@ span.hasMoreEvents {
 
 a.current-date-select {
     background-color: #4cd137 !important;
+    color: white !important;
     box-shadow: 0px 0px 0px 3px rgba(76, 209, 55, .3);
+}
+
+div.no-events {
+    font-size: 13px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+div.c-date-selected {
+    position: relative;
+    background-color: #4169e1;
+    padding: 19px 16px;
+    font-size: 13px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
 }

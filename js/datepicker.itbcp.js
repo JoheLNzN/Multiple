@@ -1,6 +1,14 @@
-/* Configurables */
+// Configurables
 var _myProjects = getJSONFromDBFake();
 
+// Default configuration 4169e1
+var _defaultConfig = {
+    "ThemeBackColor": "#4169e1",
+    "ThemeForeColor": "#fff",
+
+    /* Texts */
+    "NoEventsForSelectedDay": "No hay eventos disponibles para esta fecha."
+}
 
 /**********************************************************
  ****************    BEGIN  - Configuration   *************
@@ -118,48 +126,17 @@ function ConfigDatePicker(Projects) {
             $dtp.find('tbody span.side-a-first.dp' + ts).css('background-color', HexToRgbA(_theme, '.15'));
             $dtp.find('tbody span.side-a.dp' + ts).css('background-color', HexToRgbA(_theme, '.15'));
         }
-
-        // $dtp.find('.datepick .li-1').css('background-color', _color);
-        // $dtp.find('.datepick .li-2').css('background-color', _title);
-        // $dtp.find('.datepick .li-3').css('background-color', _details);
     });
 
-    // if (config.Project != undefined) {
-    //     _theme = config.Project.Color == undefined ? "#417AFF" : config.Project.Color;
+    $('a.datepick-cmd-today').css({
+        'background-color': _defaultConfig.ThemeBackColor,
+        'color': _defaultConfig.ThemeForeColor
+    });
 
-    //     if (config.Project.Event != undefined) {
-
-    //         switch (config.Project.Event.length) {
-    //             case 0: {
-    //                 console.log('No hay eventos :(')
-    //                 break;
-    //             }
-    //             case 1: {
-    //                 _color = config.Project.Event[0].Color;
-    //                 break;
-    //             }
-    //             case 2: {
-    //                 _color = config.Project.Event[0].Color;
-    //                 _title = config.Project.Event[1].Color;
-    //                 break;
-    //             }
-    //             default: {
-    //                 _color = config.Project.Event[0].Color;
-    //                 _title = config.Project.Event[1].Color;
-    //                 _details = config.Project.Event[2].Color;
-    //                 break;
-    //             }
-    //         }
-    //     }
-    // }
-    // else {
-    //     _theme = '#417AFF';
-    //     _color = 'red';
-    //     _title = 'white';
-    //     _details = 'red';
-    // }
-
-
+    $('div.c-date-selected').css({
+        'background-color': _defaultConfig.ThemeBackColor,
+        'color': _defaultConfig.ThemeForeColor
+    });
 }
 
 $(document).on('click', _dtp, function(e) {
@@ -329,7 +306,7 @@ function ChangeSizeDay() {
 $(window).on('resize', function() { ChangeSizeDay(); });
 ChangeSizeDay();
 
-$(_dtp).on('click', 'tbody td a.datepick-selected', function(e) {
+$(_dtp).on('click', 'tbody td a', function(e) {
     e.preventDefault();
 
     var tsClass = $(this).prop('class').split(' ')[0];
@@ -342,10 +319,12 @@ $(_dtp).on('click', 'tbody td a.datepick-selected', function(e) {
     var ts = parseInt(tsClass.substring(2));
     var date = new Date(ts);
 
-    $(this).closest('tbody').siblings('a.a.datepick-selected').removeClass('current-date-select');
+    $(this).closest('tbody').find('a').removeClass('current-date-select');
     $(this).toggleClass('current-date-select');
 
-    $('div.c-events-inner').empty();
+    CreateEventsInnerHTML();
+
+    $('div.c-date-selected').find('p').html(GetDateInTextFormatPE(date));
     ShowListEventsByDaySelected(date);
 
     // var dateDDMMYYYY = TransformDateToDDMMYYY(date);
@@ -369,17 +348,55 @@ function ShowListEventsByDaySelected(date) {
                 for (var i = 0; i < range.length; i++) {
 
                     if (TransformDateToDDMMYYY(date) == TransformDateToDDMMYYY(range[i])) {
-                        var $eventHTML = "<div class='event' style='background-color: " + event.Color + "'>" +
+                        var eventHTML = "<div class='event' style='background-color: " + event.Color + "'>" +
                             "<span class='event-title'>" + event.Title + "</span>" +
                             " <p class='event-details'>" + event.Details + "</p>" +
                             "</div>";
 
-                        $('div.c-events-inner').append($eventHTML);
+                        $('div.c-events-inner').append(eventHTML);
                     }
                 }
             }
         });
     });
+
+    var hasnotEvents = $('div.c-events-inner').find('div.event').length;
+
+    if (hasnotEvents == 0) {
+        var noEventsLength = $('div.c-events-inner').find('div.no-events').length;
+        if (noEventsLength == 0) {
+            var hasnotEventsHTML = "<div class='no-events'><p>" + _defaultConfig.NoEventsForSelectedDay + "</p></div>";
+            $('div.c-events-inner').append(hasnotEventsHTML);
+        }
+    }
+}
+
+function CreateEventsInnerHTML() {
+    var inner = $('div.c-events').find('.c-events-inner').length;
+
+    if (inner != 0) {
+        $('div.c-events').empty();
+    }
+
+    var titleSelectedDateHTML = "<div class='c-date-selected'><p></p></div>";
+    $('div.c-events').append(titleSelectedDateHTML);
+
+    var eventsInnerHTML = "<div class='c-events-inner'></div>";
+    $('div.c-events').append(eventsInnerHTML);
+}
+
+function GetDateInTextFormatPE(myDate) {
+
+    var dayName = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    var monthName = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+        'Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ];
+
+    var dateString = dayName[myDate.getDay()] + ', ' +
+        (myDate.getDate() < 10 ? "0" + myDate.getDate() : myDate.getDate()) + ' de ' +
+        monthName[myDate.getMonth()] + ' de ' + myDate.getFullYear();
+
+    return dateString;
 }
 
 function GetTimeFromElementA(ElementA) {
