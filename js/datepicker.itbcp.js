@@ -231,19 +231,19 @@ function CustomSnakeDays(Projects) {
                                 //Validate only 3 points
                                 var ulLength = $row.find('td').eq($currentIndex).find('ul.dp' + ts + ' li').length;
 
-                                if (ulLength < 4) {
+                                if (ulLength < 3) {
                                     var $liHTML = "<li class='dp" + ts + "' style='background-color: " + event.Color + "'></li>";
                                     $row.find('td').eq($currentIndex).find('ul.dp' + ts).append($liHTML);
                                 }
 
-                                console.log("Fila : " + (indexRow + 1) + ", Col : " + (indexTd + 1));
-
-                                console.log(ulLength);
-
                                 if (ulLength > 2) {
 
-                                    var hasMoreEventHTML = "<span class='hasMoreEvents'></span>";
-                                    $row.find('td').eq($currentIndex).find('a').append(hasMoreEventHTML);
+                                    var hasMoreLength = $row.find('td').eq($currentIndex).find('a').find('span.hasMoreEvents').length;
+
+                                    if (hasMoreLength == 0) {
+                                        var hasMoreEventHTML = "<span class='hasMoreEvents'></span>";
+                                        $row.find('td').eq($currentIndex).find('a').append(hasMoreEventHTML);
+                                    }
                                 }
                             }
                         }
@@ -341,31 +341,46 @@ $(_dtp).on('click', 'tbody td a.datepick-selected', function(e) {
 
     var ts = parseInt(tsClass.substring(2));
     var date = new Date(ts);
-    var dateDDMMYYYY = TransformDateToDDMMYYY(date);
-    // console.log(dateDDMMYYYY);
 
+    $(this).closest('tbody').siblings('a.a.datepick-selected').removeClass('current-date-select');
+    $(this).toggleClass('current-date-select');
 
-    // alert(date);
+    $('div.c-events-inner').empty();
+    ShowListEventsByDaySelected(date);
 
-    // if (_myObject != undefined) {
-    //     if (_myObject.Project != undefined) {
-    //         if (_myObject.Project.Event != undefined && _myObject.Project.Event != null) {
-
-    //             var $events = _myObject.Project.Event;
-    //             $('div.c-events-inner').find('div.event').remove();
-
-    //             $.each($events, function (i, evento) {
-    //                 var $eventHTML = "<div class='event' style='background-color: " + evento.Color + "'>" +
-    //                     "<span class='event-title'>" + evento.Title + "</span>" +
-    //                     " <p class='event-details'>" + evento.Details + "</p>" +
-    //                     "</div>";
-
-    //                 $('div.c-events-inner').append($eventHTML);
-    //             });
-    //         }
-    //     }
-    // }
+    // var dateDDMMYYYY = TransformDateToDDMMYYY(date);
+    // alert(dateDDMMYYYY);
 });
+
+function ShowListEventsByDaySelected(date) {
+
+    $.each(_myProjects, function(iproj, proj) {
+
+        $.each(proj.Project.Event, function(ievent, event) {
+
+            var dateStartEvent = event.StartDate;
+            var dateEndEvent = event.EndDate;
+
+            if (dateStartEvent != null &&
+                dateEndEvent != null) {
+
+                var range = GetRangeDates(dateStartEvent, dateEndEvent);
+
+                for (var i = 0; i < range.length; i++) {
+
+                    if (TransformDateToDDMMYYY(date) == TransformDateToDDMMYYY(range[i])) {
+                        var $eventHTML = "<div class='event' style='background-color: " + event.Color + "'>" +
+                            "<span class='event-title'>" + event.Title + "</span>" +
+                            " <p class='event-details'>" + event.Details + "</p>" +
+                            "</div>";
+
+                        $('div.c-events-inner').append($eventHTML);
+                    }
+                }
+            }
+        });
+    });
+}
 
 function GetTimeFromElementA(ElementA) {
     var tsClass = $(ElementA).prop('class').split(' ')[0];
@@ -377,7 +392,6 @@ function GetTimeFromElementA(ElementA) {
 }
 
 function TransformDateToDDMMYYY(date) {
-    console.log(date);
     if (date != undefined && date != null) {
         var DateDDMMYYYY = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" +
             ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" +
