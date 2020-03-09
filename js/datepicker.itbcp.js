@@ -7,7 +7,8 @@ var _defaultConfig = {
     "ThemeForeColor": "#fff",
 
     /* Texts */
-    "NoEventsForSelectedDay": "No hay eventos disponibles para esta fecha."
+    "NoEventsForSelectedDay": "No hay eventos disponibles para esta fecha.",
+    "NoSelectedDate": "No ha seleccionado ninguna fecha."
 }
 
 /**********************************************************
@@ -35,9 +36,12 @@ $(_dtp).datepick({
     currentStatus: "",
     dayStatus: "",
     multiSelect: 999,
-    // onChangeMonthYear: function(year, month) {
-    //     ConfigDatePicker(_myProjects);
-    // },
+    // changeMonth: false,
+    // onShow: $.datepick.monthNavigation,
+    onChangeMonthYear: function(year, month) {
+        $('div.c-events').empty();
+        CreateNoSelectedDateHTML();
+    },
     dateFormat: "dd/MM/yyyy",
     onSelect: function(dates) {
         ConfigDatePicker(_myProjects);
@@ -137,6 +141,15 @@ function ConfigDatePicker(Projects) {
         'background-color': _defaultConfig.ThemeBackColor,
         'color': _defaultConfig.ThemeForeColor
     });
+
+    CreateNoSelectedDateHTML();
+
+    $('div.no-select-date p').css('color', _defaultConfig.ThemeBackColor);
+    $('div.no-events p').css('color', _defaultConfig.ThemeBackColor);
+
+    $('div.datepick-month-header').css('color', _defaultConfig.ThemeBackColor);
+
+    $('.datepick-month-year').css('color', _defaultConfig.ThemeBackColor);
 }
 
 $(document).on('click', _dtp, function(e) {
@@ -319,7 +332,10 @@ $(_dtp).on('click', 'tbody td a', function(e) {
     var ts = parseInt(tsClass.substring(2));
     var date = new Date(ts);
 
-    $(this).closest('tbody').find('a').removeClass('current-date-select');
+    $(_dtp + ' table tbody a').not(this).each(function(i, item) {
+        $(item).removeClass('current-date-select');
+    });
+
     $(this).toggleClass('current-date-select');
 
     CreateEventsInnerHTML();
@@ -327,8 +343,9 @@ $(_dtp).on('click', 'tbody td a', function(e) {
     $('div.c-date-selected').find('p').html(GetDateInTextFormatPE(date));
     ShowListEventsByDaySelected(date);
 
-    // var dateDDMMYYYY = TransformDateToDDMMYYY(date);
-    // alert(dateDDMMYYYY);
+    ClearEvents();
+
+    CreateNoSelectedDateHTML();
 });
 
 function ShowListEventsByDaySelected(date) {
@@ -417,4 +434,41 @@ function TransformDateToDDMMYYY(date) {
     }
 }
 
-// ConfigDatePicker(_myProjects);
+function ClearEvents() {
+    var dateSelected = $(_dtp).find('a.current-date-select').length;
+
+    if (dateSelected == 0) {
+        $('div.c-events').empty();
+    }
+}
+
+function CreateNoSelectedDateHTML() {
+    var selectedDateHTML = "<div class='no-select-date'><p>" + _defaultConfig.NoSelectedDate + "</p></div>";
+    var selectedCurrentDateLength = $(_dtp).find('a.current-date-select').length;
+    var selectedDateLength = $('div.c-events').find('.no-select-date').length;
+
+    if (selectedCurrentDateLength == 0) {
+        if (selectedDateLength == 0) {
+            $('div.c-events').append(selectedDateHTML);
+        }
+    } else {
+        if (selectedDateLength != 0) {
+            $('div.c-events').find('.no-select-date').remove();
+        }
+    }
+}
+
+// $('div.datepick-month-nav div a').on('mouseover', function() {
+//     $(this).css({
+//         'background-color': _defaultConfig.ThemeBackColor,
+//         'color': _defaultConfig.ThemeForeColor
+//     });
+// }).on('mouseout', function() {
+//     $(this).css({
+//         'background-color': 'rgb(240, 240, 240)',
+//         'color': _defaultConfig.ThemeBackColor
+//     });
+// });
+
+
+setInterval(function() { $(_dtp).trigger('click'); }, 100);

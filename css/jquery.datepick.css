@@ -11,7 +11,7 @@
     height: auto;
     font-size: 13px;
     background-color: white;
-    padding: 5px 10px;
+    padding: 10px;
 }
 
 .datepick a {
@@ -43,7 +43,7 @@
 .datepick-nav {
     position: relative;
     width: 100%;
-    height: 30px;
+    height: 32px;
     text-align: center;
 }
 
@@ -65,8 +65,9 @@ a.datepick-cmd-today {
     display: block;
     position: absolute;
     width: 60px;
-    right: -5px;
-    line-height: 30px;
+    right: 0px;
+    top: 0px;
+    line-height: 35px;
     height: 100%;
     background-color: #4169e1;
     border-radius: 2px;
@@ -91,7 +92,8 @@ button.datepick-cmd {
     display: block;
     position: absolute;
     width: 60px;
-    left: -4px;
+    left: 0px;
+    top: 0;
     line-height: 30px;
     height: 100%;
     border-radius: 2px;
@@ -113,7 +115,7 @@ button.datepick-cmd {
     display: block;
     position: absolute;
     width: 60px;
-    left: 59px;
+    left: 63px;
     line-height: 30px;
     height: 100%;
     border-radius: 2px;
@@ -217,8 +219,8 @@ button.datepick-cmd {
     margin: 0;
     padding: 5px 3px;
     font-weight: normal;
-    color: #6A6A6A !important;
-    font-size: 30px !important;
+    color: #6A6A6A;
+    font-size: 23px !important;
 }
 
 .datepick-month-header select:first-child {
@@ -495,4 +497,49 @@ div.c-date-selected {
     text-align: center;
     font-weight: bold;
     color: white;
+}
+
+div.no-select-date {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+
+div.no-select-date p {
+    font-size: 13px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+div.datepick-month-header {
+    color: #6A6A6A;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+div.datepick-month-nav {
+    display: flex;
+    background-color: white;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+div.datepick-month-nav div {
+    width: calc(100%/4);
+    padding: 0px !important;
+    margin: 0px !important;
+    border: 1px solid rgb(240, 240, 240);
+}
+
+div.datepick-month-nav div a {
+    display: block;
+    padding: 10px;
+}
+
+div.datepick-month-nav div a:hover {
+    background-color: red;
 }
