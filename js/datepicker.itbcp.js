@@ -5,7 +5,7 @@ var _myProjects = getJSONFromDBFake();
 var _defaultConfig = {
     ThemeBackColor: "#4169e1",
     ThemeForeColor: "#fff",
-    DefaultLanguage: "es-PE"
+    DefaultLanguage: "pt-BR"
 }
 
 /*

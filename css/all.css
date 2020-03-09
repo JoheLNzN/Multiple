@@ -11,7 +11,8 @@ body {
 
 div.c-mobile {
     margin: 0 auto;
-    width: 320px;
+    width: 600px;
+    max-width: 600px;
 }
 
 @media all and (max-width: 450px) {
