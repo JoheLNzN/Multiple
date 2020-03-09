@@ -3,51 +3,124 @@ var _myProjects = getJSONFromDBFake();
 
 // Default configuration 4169e1
 var _defaultConfig = {
-    "ThemeBackColor": "#4169e1",
-    "ThemeForeColor": "#fff",
-
-    /* Texts */
-    "NoEventsForSelectedDay": "No hay eventos disponibles para esta fecha.",
-    "NoSelectedDate": "No ha seleccionado ninguna fecha."
+    ThemeBackColor: "#4169e1",
+    ThemeForeColor: "#fff",
+    DefaultLanguage: "es-PE"
 }
+
+/*
+af = Afrikaans
+am = Amharic
+ar-DZ = Algerian (and Tunisian) Arabic
+ar-EG = Arabic
+az = Azerbaijani
+bg = Bulgarian
+bs = Bosnian
+ca = Catalan
+cs = Czech
+da = Danish
+de-CH = Swiss-German
+de = German
+el = Greek
+en = English
+en-AU = English/Australia
+en-GB = English UK
+eo = Esperanto
+es-AR = Spanish/Argentina
+es-PE = Spanish/Perú
+es = Spanish
+et = Estonian
+eu = Basque
+fa = Persian/Farsi
+fi = Finnish
+fo = Faroese
+fr = French
+gl = Galician
+he = Hebrew
+hi-IN = Hindi INDIA
+hi = English Hindi
+hr = Croatian
+hu = Hungarian
+hy = Armenian
+id = Indonesian
+it = Italian
+ja = Japanese
+ka = Georgian
+ko = Korean
+lt = Lithuanian
+mk = Македонски MK
+ml = Malayalam
+ms = Malaysian
+nl = Dutch
+pl = Polish
+pt-BR = Brazilian Portuguese
+pt = Portuguese Portuguese
+ro = Romanian
+ru = Russian
+sk = Slovak
+sl = Slovenian
+sk = Albanian --> 50
+sv = Swedish
+ta = Tamil
+th = Thai
+tr = Turkish
+uk = Ukrainian
+ur = Urdu
+vi = Vietnamese
+zh-HK = Hong Kong Chinese --> 58
+*/
 
 /**********************************************************
  ****************    BEGIN  - Configuration   *************
  *********************************************************/
 
 /* Estáticos */
+
+function GetLanguage(lang){
+    return languages.filter(
+        function(data){ return data.lang == lang }
+    )[0];
+}
+
+var _language = GetLanguage(_defaultConfig.DefaultLanguage);
+
+if(_language == undefined){
+    _language = GetLanguage('es-PE');
+}
+
+/* Picker */
 var _dtp = '#datepicker';
 
-$(_dtp).datepick({
-    firstDay: 1,
-    monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"],
-    monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"],
-    dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
-    dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sáb"],
-    dayNamesMin: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sáb"],
-    prevText: "",
-    nextText: "",
-    todayText: "Hoy",
-    prevStatus: "",
-    nextStatus: "",
-    todayStatus: "",
-    monthStatus: "",
-    yearStatus: "",
-    currentStatus: "",
-    dayStatus: "",
-    multiSelect: 999,
-    // changeMonth: false,
-    // onShow: $.datepick.monthNavigation,
-    onChangeMonthYear: function(year, month) {
-        $('div.c-events').empty();
-        CreateNoSelectedDateHTML();
-        AutomaticConfigPicker();
-    },
-    dateFormat: "dd/MM/yyyy",
-    onSelect: function(dates) {
-        ConfigDatePicker(_myProjects);
-    }
-});
+$(_dtp).datepick(
+    {
+        monthNames: _language.values.monthNames,
+        monthNamesShort: _language.values.monthNamesShort,
+        dayNames: _language.values.dayNames,
+        dayNamesShort: _language.values.dayNamesShort,
+        dayNamesMin: _language.values.dayNamesMin,
+        todayText: _language.values.todayText,
+        firstDay: _language.values.firstDay,
+
+        prevText: "",
+        nextText: "",
+        prevStatus: "",
+        nextStatus: "",
+        todayStatus: "",
+        monthStatus: "",
+        yearStatus: "",
+        currentStatus: "",
+        dayStatus: "",
+        multiSelect: 999,
+        onChangeMonthYear: function (year, month) {
+            $('div.c-events').empty();
+            CreateNoSelectedDateHTML();
+            AutomaticConfigPicker();
+        },
+        dateFormat: "dd/MM/yyyy",
+        onSelect: function (dates) {
+            ConfigDatePicker(_myProjects);
+        },
+    });
 
 function GetRangeDates(_startDate, _endDate) {
 
@@ -74,7 +147,7 @@ function GetAllDatesByProjects(Projects) {
 
     var allDates = [];
 
-    $.each(Projects, function(iproj, proj) {
+    $.each(Projects, function (iproj, proj) {
 
         var range = GetRangeDates(proj.Project.StartDate, proj.Project.EndDate)
 
@@ -114,7 +187,7 @@ function ConfigDatePicker(Projects) {
 
     var $dtp = $(document).find(_dtp);
 
-    $.each(Projects, function(iproj, proj) {
+    $.each(Projects, function (iproj, proj) {
 
         _theme = proj.Project.Color;
 
@@ -153,7 +226,7 @@ function ConfigDatePicker(Projects) {
     $('.datepick-month-year').css('color', _defaultConfig.ThemeBackColor);
 }
 
-$(document).on('click', _dtp, function(e) {
+$(document).on('click', _dtp, function (e) {
     e.preventDefault();
     ChangeSizeDay();
     ConfigDatePicker(_myProjects);
@@ -169,11 +242,11 @@ function CustomSnakeDays(Projects) {
     var $dtp = $(document).find(_dtp);
     var $rows = $dtp.find('tbody tr');
 
-    $rows.each(function(indexRow, itemRow) {
+    $rows.each(function (indexRow, itemRow) {
         var $row = $(itemRow);
         var $tds = $row.find('td');
 
-        $tds.each(function(indexTd, itemTd) {
+        $tds.each(function (indexTd, itemTd) {
 
             /* 0 to 6 */
             var $currentIndex = indexTd;
@@ -193,11 +266,11 @@ function CustomSnakeDays(Projects) {
             var colorEvent;
 
             //Projects foreach
-            $.each(Projects, function(iproj, proj) {
+            $.each(Projects, function (iproj, proj) {
                 colorEvent = proj.Project.Color;
 
                 //Events foreach
-                $.each(proj.Project.Event, function(ievent, event) {
+                $.each(proj.Project.Event, function (ievent, event) {
                     var currentTD = $row.find('td').eq(indexTd);
 
                     var dateStartEvent = event.StartDate;
@@ -317,10 +390,10 @@ function ChangeSizeDay() {
     $(_dtp).find('table tbody tr td').css('height', w + 'px');
 }
 
-$(window).on('resize', function() { ChangeSizeDay(); });
+$(window).on('resize', function () { ChangeSizeDay(); });
 ChangeSizeDay();
 
-$(_dtp).on('click', 'tbody td a', function(e) {
+$(_dtp).on('click', 'tbody td a', function (e) {
     e.preventDefault();
 
     var tsClass = $(this).prop('class').split(' ')[0];
@@ -333,7 +406,7 @@ $(_dtp).on('click', 'tbody td a', function(e) {
     var ts = parseInt(tsClass.substring(2));
     var date = new Date(ts);
 
-    $(_dtp + ' table tbody a').not(this).each(function(i, item) {
+    $(_dtp + ' table tbody a').not(this).each(function (i, item) {
         $(item).removeClass('current-date-select');
     });
 
@@ -351,9 +424,9 @@ $(_dtp).on('click', 'tbody td a', function(e) {
 
 function ShowListEventsByDaySelected(date) {
 
-    $.each(_myProjects, function(iproj, proj) {
+    $.each(_myProjects, function (iproj, proj) {
 
-        $.each(proj.Project.Event, function(ievent, event) {
+        $.each(proj.Project.Event, function (ievent, event) {
 
             var dateStartEvent = event.StartDate;
             var dateEndEvent = event.EndDate;
@@ -383,7 +456,7 @@ function ShowListEventsByDaySelected(date) {
     if (hasnotEvents == 0) {
         var noEventsLength = $('div.c-events-inner').find('div.no-events').length;
         if (noEventsLength == 0) {
-            var hasnotEventsHTML = "<div class='no-events'><p>" + _defaultConfig.NoEventsForSelectedDay + "</p></div>";
+            var hasnotEventsHTML = "<div class='no-events'><p>" + _language.values.NoEventsForSelectedDay + "</p></div>";
             $('div.c-events-inner').append(hasnotEventsHTML);
         }
     }
@@ -444,7 +517,7 @@ function ClearEvents() {
 }
 
 function CreateNoSelectedDateHTML() {
-    var selectedDateHTML = "<div class='no-select-date'><p>" + _defaultConfig.NoSelectedDate + "</p></div>";
+    var selectedDateHTML = "<div class='no-select-date'><p>" + _language.values.NoSelectedDate + "</p></div>";
     var selectedCurrentDateLength = $(_dtp).find('a.current-date-select').length;
     var selectedDateLength = $('div.c-events').find('.no-select-date').length;
 
@@ -459,9 +532,9 @@ function CreateNoSelectedDateHTML() {
     }
 }
 
-function AutomaticConfigPicker(){
-    var timer = setInterval(function() { $(_dtp).trigger('click'); }, 100);
-    setTimeout(function(){
+function AutomaticConfigPicker() {
+    var timer = setInterval(function () { $(_dtp).trigger('click'); }, 100);
+    setTimeout(function () {
         clearInterval(timer);
     }, 1000)
 }

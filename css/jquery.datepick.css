@@ -64,7 +64,9 @@
 a.datepick-cmd-today {
     display: block;
     position: absolute;
-    width: 60px;
+    width: auto;
+    padding: 0px 7px;
+    min-width: 60px;
     right: 0px;
     top: 0px;
     line-height: 35px;
