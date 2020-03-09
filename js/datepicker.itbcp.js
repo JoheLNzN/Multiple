@@ -41,6 +41,7 @@ $(_dtp).datepick({
     onChangeMonthYear: function(year, month) {
         $('div.c-events').empty();
         CreateNoSelectedDateHTML();
+        AutomaticConfigPicker();
     },
     dateFormat: "dd/MM/yyyy",
     onSelect: function(dates) {
@@ -458,17 +459,9 @@ function CreateNoSelectedDateHTML() {
     }
 }
 
-// $('div.datepick-month-nav div a').on('mouseover', function() {
-//     $(this).css({
-//         'background-color': _defaultConfig.ThemeBackColor,
-//         'color': _defaultConfig.ThemeForeColor
-//     });
-// }).on('mouseout', function() {
-//     $(this).css({
-//         'background-color': 'rgb(240, 240, 240)',
-//         'color': _defaultConfig.ThemeBackColor
-//     });
-// });
-
-
-setInterval(function() { $(_dtp).trigger('click'); }, 100);
+function AutomaticConfigPicker(){
+    var timer = setInterval(function() { $(_dtp).trigger('click'); }, 100);
+    setTimeout(function(){
+        clearInterval(timer);
+    }, 1000)
+}
